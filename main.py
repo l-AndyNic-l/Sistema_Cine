@@ -15,27 +15,23 @@ while True:
 
     limpiar_pantalla( menu )
 
-    opcion = input( "Ingrese una opción: " )
+    opcion = input( "* Ingrese una opción: " )
 
     if opcion == "1":
         
-        limpiar_pantalla( "===== Mostrar asientos =====" )
-
-        print( "\n-------------------------------" )
-        print( "         Pantalla Cine" )
-        print( "-------------------------------" )
+        limpiar_pantalla( "====== Mostrar asientos ======" )
 
         mostrar_asientos()
 
     elif opcion == "2":
         
-        limpiar_pantalla( "===== Comprar Entrada =====" )
+        limpiar_pantalla( "====== Comprar Entrada ======" )
 
         comprar_entrada()
 
     elif opcion == "3":
         
-        limpiar_pantalla( "===== Ver Lista de Ventas =====" )
+        limpiar_pantalla( "====== Ver Lista de Ventas ======" )
 
         mostrar_ventas()
 

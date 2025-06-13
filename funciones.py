@@ -132,20 +132,12 @@ asientos = [
 
 ventas = []
 
-def mostrar_ventas():
-
-    if not ventas:
-
-        print( "No se han realizado ventas." )
-
-    else:
-
-        for v in ventas:
-
-            print( f"Nombre: { v[ 'nombre' ] } | Entrada: Fila { v[ 'fila' ] }-{ v[ 'asiento' ][ 'numero' ] } | Precio: { v[ 'precio' ] }" )
-
 
 def mostrar_asientos():
+    
+    print( "\n-------------------------------" )
+    print( "         Pantalla Cine" )
+    print( "-------------------------------" )
 
     for fila in asientos:
 
@@ -162,7 +154,7 @@ def mostrar_asientos():
 
 def comprar_entrada():
 
-    fila = buscar_fila( "Ingrese la fila ( A a la E ): " )
+    fila = buscar_fila( "\n*Ingrese la fila ( A a la E ): " )
 
     columna = buscar_columna( fila, "Ingrese la columna de asiento ( 1 al 5 ): " )
 
@@ -177,7 +169,7 @@ def comprar_entrada():
 
     ventas.append( venta )
     print( "Entrada comprada exitosamente." )
-    
+
 def buscar_fila( mensaje ):
 
     fila = input( mensaje ).strip().title()
@@ -211,6 +203,18 @@ def buscar_columna( fila, mensaje ):
                 return
 
     print( "ERROR! La columna ingresada no existe." )
+
+def mostrar_ventas():
+
+    if not ventas:
+
+        print( "No se han realizado ventas." )
+
+    else:
+
+        for v in ventas:
+
+            print( f"Nombre: { v[ 'nombre' ] } | Entrada: Fila { v[ 'fila' ] }-{ v[ 'asiento' ][ 'numero' ] } | Precio: { v[ 'precio' ] }" )
 
 def limpiar_pantalla( titulo ):
 
