@@ -34,7 +34,10 @@ while True:
         comprar_entrada()
 
     elif opcion == "3":
-        pass
+        
+        limpiar_pantalla( "===== Ver Lista de Ventas =====" )
+
+        mostrar_ventas()
 
     elif opcion == "4":
         

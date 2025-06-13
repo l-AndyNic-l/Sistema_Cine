@@ -132,6 +132,19 @@ asientos = [
 
 ventas = []
 
+def mostrar_ventas():
+
+    if not ventas:
+
+        print( "No se han realizado ventas." )
+
+    else:
+
+        for v in ventas:
+
+            print( f"Nombre: { v[ 'nombre' ] } | Entrada: Fila { v[ 'fila' ] }-{ v[ 'asiento' ][ 'numero' ] } | Precio: { v[ 'precio' ] }" )
+
+
 def mostrar_asientos():
 
     for fila in asientos:
