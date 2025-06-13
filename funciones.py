@@ -130,6 +130,8 @@ asientos = [
     },
 ]
 
+ventas = []
+
 def mostrar_asientos():
 
     for fila in asientos:
@@ -144,6 +146,58 @@ def mostrar_asientos():
 
             else:
                 print ( f" [X] ", end="" )
+
+def comprar_entrada():
+
+    fila = buscar_fila( "Ingrese la fila ( A a la E ): " )
+
+    columna = buscar_columna( fila, "Ingrese la columna de asiento ( 1 al 5 ): " )
+
+    nombre = input( "Ingrese su nombre: " )
+
+    venta = {
+        "nombre": nombre,
+        "fila": fila[ "fila" ],
+        "asiento": columna,
+        "precio": 10.00
+    }
+
+    ventas.append( venta )
+    print( "Entrada comprada exitosamente." )
+    
+def buscar_fila( mensaje ):
+
+    fila = input( mensaje ).strip().title()
+
+    for f in asientos:
+
+        if f[ "fila" ] == fila:
+
+            return f
+        
+    print( "ERROR! La fila ingresada no existe." )
+
+def buscar_columna( fila, mensaje ):
+
+    columna = int( input( mensaje ) )
+
+    for c in fila[ "asientos" ]:
+
+        if c[ "numero" ] == columna:
+
+            if c[ "disponibilidad" ] == 0:
+
+                print( "Asiento disponible!" )
+
+                c[ "disponibilidad" ] = 1
+
+                return c
+            
+            else:
+                print( "Asiento NO disponible!" )
+                return
+
+    print( "ERROR! La columna ingresada no existe." )
 
 def limpiar_pantalla( titulo ):
 

@@ -28,7 +28,10 @@ while True:
         mostrar_asientos()
 
     elif opcion == "2":
-        pass
+        
+        limpiar_pantalla( "===== Comprar Entrada =====" )
+
+        comprar_entrada()
 
     elif opcion == "3":
         pass
