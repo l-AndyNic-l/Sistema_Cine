@@ -31,7 +31,7 @@ while True:
 
     elif opcion == "3":
         
-        limpiar_pantalla( "====== Ver Lista de Ventas ======" )
+        limpiar_pantalla( "====== Ver Lista de Ventas ======\n" )
 
         mostrar_ventas()
 

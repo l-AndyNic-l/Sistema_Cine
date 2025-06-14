@@ -132,7 +132,6 @@ asientos = [
 
 ventas = []
 
-
 def mostrar_asientos():
     
     print( "\n-------------------------------" )
@@ -154,57 +153,77 @@ def mostrar_asientos():
 
 def comprar_entrada():
 
-    fila = buscar_fila( "\n*Ingrese la fila ( A a la E ): " )
+    while True:
 
-    columna = buscar_columna( fila, "Ingrese la columna de asiento ( 1 al 5 ): " )
+        fila = buscar_fila( "\n*Ingrese la fila ( A a la E ): " )
 
-    nombre = input( "Ingrese su nombre: " )
+        columna = buscar_columna( fila, "\n*Ingrese la columna de asiento ( 1 al 5 ): " )
 
-    venta = {
-        "nombre": nombre,
-        "fila": fila[ "fila" ],
-        "asiento": columna,
-        "precio": 10.00
-    }
+        if columna != False:
+        
+            nombre = validar_nombre( "\n*Ingrese su nombre para realizar la compra: " )
 
-    ventas.append( venta )
-    print( "Entrada comprada exitosamente." )
+            venta = {
+                "nombre": nombre,
+                "fila": fila[ "fila" ],
+                "asiento": columna,
+                "precio": 10.00
+            }
+
+            ventas.append( venta )
+            print( f"\n*** La entrada Fila { fila['fila'] }-{ columna['numero'] }, fue comprada exitosamente por { nombre } ***" )
+            print( "--------------------" )
+            print( "Total pagado: $10.0" )
+            print( "--------------------" ) 
+            break
 
 def buscar_fila( mensaje ):
 
-    fila = input( mensaje ).strip().title()
+    while True:
 
-    for f in asientos:
+        fila = validar_fila( mensaje )
 
-        if f[ "fila" ] == fila:
+        for f in asientos:
 
-            return f
+            if f[ "fila" ] == fila:
+
+                return f
         
-    print( "ERROR! La fila ingresada no existe." )
+        print( "ERROR! La fila ingresada no existe." )
 
 def buscar_columna( fila, mensaje ):
 
-    columna = int( input( mensaje ) )
+    while True:
+        columna = validar_columna( mensaje )
 
-    for c in fila[ "asientos" ]:
+        for c in fila[ "asientos" ]:
 
-        if c[ "numero" ] == columna:
+            if c[ "numero" ] == columna:
 
-            if c[ "disponibilidad" ] == 0:
+                columna_econtrada = True
 
-                print( "Asiento disponible!" )
+                if c[ "disponibilidad" ] == 0:
 
-                c[ "disponibilidad" ] = 1
+                    print( "\n|| El asiento se encuentra disponible! ||" )
 
-                return c
+                    c[ "disponibilidad" ] = 1
+
+                    return c
             
-            else:
-                print( "Asiento NO disponible!" )
-                return
+                else:
+                    print( "\n|| El asiento NO se encuentra disponible! ||" )
+                    return False      
 
-    print( "ERROR! La columna ingresada no existe." )
+        if columna_econtrada == False:
+
+            print( "ERROR! La columna ingresada no existe." ) 
+
+        else:
+            break       
 
 def mostrar_ventas():
+
+    contador = 1
 
     if not ventas:
 
@@ -214,9 +233,56 @@ def mostrar_ventas():
 
         for v in ventas:
 
-            print( f"Nombre: { v[ 'nombre' ] } | Entrada: Fila { v[ 'fila' ] }-{ v[ 'asiento' ][ 'numero' ] } | Precio: { v[ 'precio' ] }" )
+            print( f"{ contador }) Nombre: { v[ 'nombre' ] } | Entrada: Fila { v[ 'fila' ] }-{ v[ 'asiento' ][ 'numero' ] } | Total: { v[ 'precio' ] }" )
+            contador += 1
+
 
 def limpiar_pantalla( titulo ):
 
     os.system( "cls" )
     print( titulo )
+
+
+# Validaciones.
+
+def validar_fila( mensaje ):
+
+    while True:
+
+        fila = input( mensaje ).strip().title()
+
+        if len( fila ) == 1:
+
+            return fila
+        
+        else:
+            print( "ERROR! Debe ingresar una letra dentro del rango de A a la E." )
+
+def validar_columna( mensaje ):
+
+    while True:
+        try:
+            columna = int( input( mensaje ) )
+
+            if columna >= 1 and columna <= 5:
+                
+                return columna
+            
+            else:
+                print( "ERROR! Debe ingresar un número de columna dentro del rango 1 a 5." )
+
+        except:
+            print( "ERROR! Debe ingresar un número de columna válido." )
+
+def validar_nombre( mensaje ):
+
+    while True:
+
+        nombre = input( mensaje ).strip().title()
+
+        if len( nombre ) >= 3:
+
+            return nombre
+        
+        else:
+            print( "ERROR! Debe ingresar un nombre con más de 3 carácteres." )
